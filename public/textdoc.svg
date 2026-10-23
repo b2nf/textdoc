@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <rect
+    width="64"
+    height="64"
+    rx="13"
+    fill="#DCE8D3"
+  />
+
+  <text
+    x="20"
+    y="49"
+    font-family="'Source Serif 4', Georgia, serif"
+    font-size="46"
+    font-weight="700"
+    text-anchor="middle"
+    fill="#293E32"
+  >T</text>
+
+  <g
+    fill="none"
+    stroke="#DCE8D3"
+    stroke-width="5"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <path d="M30 45 49 26"/>
+  </g>
+
+  <g
+    fill="none"
+    stroke="#293E32"
+    stroke-width="2.8"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <path d="M30 45 49 26"/>
+    <path d="M45 22 49 26"/>
+    <path d="M51 9v7"/>
+    <path d="M47.5 12.5h7"/>
+    <path d="M38 15v4"/>
+    <path d="M36 17h4"/>
+    <path d="M54 22v3"/>
+    <path d="M52.5 23.5h3"/>
+  </g>
+</svg>

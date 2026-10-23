@@ -1,0 +1,1017 @@
+:root {
+  font-family: Inter, "Segoe UI", sans-serif;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-optical-sizing: auto;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  width: 100%;
+  min-height: 100%;
+  margin: 0;
+}
+
+body {
+  min-width: 320px;
+  min-height: 100vh;
+  background: #f5f3ed;
+}
+
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.45;
+}
+
+/* --------------------------------------------------
+   App themes
+-------------------------------------------------- */
+
+.app-shell {
+  --page-bg: #f5f3ed;
+  --main-text: #343a35;
+  --muted-text: #777b71;
+  --muted-strong: #687265;
+  --accent: #718675;
+  --privacy-underline: #586b52;
+
+  --top-border: #e1e1d8;
+
+  --panel-border: #dedfd6;
+  --input-panel-bg: #faf9f5;
+  --output-panel-bg: #f0f1e9;
+  --output-panel-border: #dfe2d7;
+  --divider: #e0e2d8;
+
+  --metadata: #858b7f;
+  --placeholder: #9a9e93;
+  --output-text: #465447;
+
+  --primary-bg: #293e32;
+  --primary-border: #293e32;
+  --primary-text: #ffffff;
+  --primary-hover: #3a5342;
+
+  --small-text: #464d44;
+  --small-border: #cbd0c4;
+  --small-hover-border: #aab9a5;
+  --small-hover-bg: #e8ece4;
+
+  --select-bg: #faf9f5;
+  --select-text: #465447;
+  --select-border: #cbd0c4;
+
+  --segment-bg: #e8e9e0;
+  --segment-border: #e8e9e0;
+  --segment-selected-bg: #faf9f5;
+  --segment-selected-text: #465447;
+  --segment-selected-border: #e2e4da;
+
+  --toggle-bg: #f8f7f1;
+  --toggle-border: #d3d7cc;
+  --toggle-icon: #566f56;
+  --toggle-hover-bg: #e9ede4;
+  --toggle-hover-border: #a7b5a0;
+
+  --focus-ring: #78966f;
+
+  position: relative;
+  isolation: isolate;
+  min-height: 100vh;
+  background: var(--page-bg);
+  color: var(--main-text);
+  color-scheme: light;
+
+  transition:
+    background-color 280ms ease,
+    color 280ms ease;
+}
+
+.app-shell[data-theme="dark"] {
+  --page-bg: #222520;
+  --main-text: #e8ebe2;
+  --muted-text: #b1b6aa;
+  --muted-strong: #b9c0b0;
+  --accent: #a7b99b;
+  --privacy-underline: #849575;
+
+  --top-border: #393d35;
+
+  --panel-border: #41463c;
+  --input-panel-bg: #292d27;
+  --output-panel-bg: #30352d;
+  --output-panel-border: #454b40;
+  --divider: #43483e;
+
+  --metadata: #a4ad9b;
+  --placeholder: #929a8d;
+  --output-text: #c4d2bd;
+
+  --primary-bg: #a5b69a;
+  --primary-border: #a5b69a;
+  --primary-text: #232920;
+  --primary-hover: #bac8ae;
+
+  --small-text: #e0e5d8;
+  --small-border: #4f5648;
+  --small-hover-border: #77896e;
+  --small-hover-bg: #393f34;
+
+  --select-bg: #2b2f29;
+  --select-text: #e0e5d8;
+  --select-border: #4f5648;
+
+  --segment-bg: #232720;
+  --segment-border: #454b40;
+  --segment-selected-bg: #41483a;
+  --segment-selected-text: #e8ebe2;
+  --segment-selected-border: #59644f;
+
+  --toggle-bg: #2a2e28;
+  --toggle-border: #4a5044;
+  --toggle-icon: #b0c2a4;
+  --toggle-hover-bg: #363d31;
+  --toggle-hover-border: #788a6e;
+
+  --focus-ring: #a0b791;
+
+  color-scheme: dark;
+}
+
+/* --------------------------------------------------
+   Whole-page theme transition
+-------------------------------------------------- */
+
+.app-shell::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  pointer-events: none;
+  background: var(--page-bg);
+  opacity: 0;
+}
+
+.app-shell.theme-changing::after {
+  animation: page-theme-fade 520ms ease-in-out both;
+}
+
+@keyframes page-theme-fade {
+  0% {
+    opacity: 0;
+  }
+
+  35% {
+    opacity: 0.58;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+/* --------------------------------------------------
+   Header and logo
+-------------------------------------------------- */
+
+.topbar {
+  height: 62px;
+  padding: 0 max(6%, calc((100% - 1240px) / 2));
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--top-border);
+
+  transition: border-color 280ms ease;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+}
+
+.brand-name {
+  display: inline-flex;
+  align-items: baseline;
+  font-size: 32px;
+  font-weight: 650;
+  letter-spacing: -1.2px;
+  line-height: 1;
+}
+
+.brand-text {
+  color: var(--main-text);
+  transition: color 280ms ease;
+}
+
+.brand-doc {
+  color: var(--accent);
+  transition: color 280ms ease;
+}
+
+.topbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+}
+
+.privacy-label {
+  position: relative;
+  display: inline-block;
+  padding-bottom: 5px;
+
+  color: var(--muted-strong);
+  font-size: 9px;
+  font-weight: 650;
+  letter-spacing: 1px;
+  white-space: nowrap;
+
+  transition: color 280ms ease;
+}
+
+/* Angled accent underline */
+
+.privacy-label::after {
+  content: "";
+  position: absolute;
+  left: 1px;
+  bottom: -1px;
+  width: 100%;
+  height: 3px;
+  background: var(--privacy-underline);
+  clip-path: polygon(3% 0, 100% 0, 97% 100%, 0 100%);
+  transform: skewX(-14deg) rotate(-1deg);
+  transform-origin: left center;
+
+  transition: background-color 280ms ease;
+}
+
+/* Crossed-cloud icon */
+
+.local-processing-icon {
+  display: block;
+  flex: 0 0 21px;
+  width: 21px;
+  height: 21px;
+  color: var(--muted-strong);
+
+  transition: color 280ms ease;
+}
+
+/* --------------------------------------------------
+   Sun and moon theme toggle
+-------------------------------------------------- */
+
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 36px;
+  height: 36px;
+  flex: 0 0 36px;
+  padding: 0;
+
+  border: 1px solid var(--toggle-border);
+  border-radius: 10px;
+  background: var(--toggle-bg);
+  color: var(--toggle-icon);
+
+  transition:
+    background-color 220ms ease,
+    border-color 220ms ease,
+    color 220ms ease;
+}
+
+.theme-toggle:hover {
+  border-color: var(--toggle-hover-border);
+  background: var(--toggle-hover-bg);
+}
+
+.theme-toggle:active {
+  background: var(--toggle-hover-bg);
+}
+
+.theme-icon {
+  position: relative;
+  display: block;
+  width: 19px;
+  height: 19px;
+
+  transition: transform 160ms ease;
+}
+
+.theme-toggle:hover .theme-icon {
+  transform: scale(1.08);
+}
+
+.theme-icon svg {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  pointer-events: none;
+}
+
+.theme-sun,
+.theme-moon {
+  color: var(--toggle-icon);
+}
+
+/* Resting positions in light mode */
+
+.app-shell[data-theme="light"] .theme-sun {
+  opacity: 1;
+  transform: translate(0, 0) scale(1);
+}
+
+.app-shell[data-theme="light"] .theme-moon {
+  opacity: 0;
+  transform: translate(-13px, 2px) scale(0.68);
+}
+
+/* Resting positions in dark mode */
+
+.app-shell[data-theme="dark"] .theme-sun {
+  opacity: 0;
+  transform: translate(8px, 10px) scale(0.65);
+}
+
+.app-shell[data-theme="dark"] .theme-moon {
+  opacity: 1;
+  transform: translate(0, 0) scale(1);
+}
+
+/* Light to dark */
+
+.app-shell[data-theme="dark"]
+  .theme-icon--animate
+  .theme-sun {
+  animation: orbit-out 500ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+.app-shell[data-theme="dark"]
+  .theme-icon--animate
+  .theme-moon {
+  animation: orbit-in 500ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+/* Dark to light */
+
+.app-shell[data-theme="light"]
+  .theme-icon--animate
+  .theme-moon {
+  animation: orbit-out 500ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+.app-shell[data-theme="light"]
+  .theme-icon--animate
+  .theme-sun {
+  animation: orbit-in 500ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+@keyframes orbit-out {
+  0% {
+    opacity: 1;
+    transform: translate(0, 0) scale(1);
+  }
+
+  25% {
+    opacity: 1;
+    transform: translate(3px, -2px) scale(0.98);
+  }
+
+  52% {
+    opacity: 0.9;
+    transform: translate(7px, 0) scale(0.9);
+  }
+
+  76% {
+    opacity: 0.55;
+    transform: translate(8px, 5px) scale(0.78);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate(8px, 10px) scale(0.65);
+  }
+}
+
+@keyframes orbit-in {
+  0% {
+    opacity: 0;
+    transform: translate(-13px, 2px) scale(0.68);
+  }
+
+  24% {
+    opacity: 0.55;
+    transform: translate(-10px, -5px) scale(0.78);
+  }
+
+  50% {
+    opacity: 0.85;
+    transform: translate(-4px, -9px) scale(0.94);
+  }
+
+  75% {
+    opacity: 1;
+    transform: translate(3px, -5px) scale(1.04);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translate(0, 0) scale(1);
+  }
+}
+
+/* --------------------------------------------------
+   Main content and introduction
+-------------------------------------------------- */
+
+.main-content {
+  width: min(1240px, 88%);
+  margin: 0 auto;
+  padding: 18px 0 24px;
+}
+
+.intro {
+  margin-bottom: 17px;
+}
+
+.intro h1 {
+  margin: 0;
+  color: var(--main-text);
+  font-size: 20px;
+  font-weight: 540;
+  letter-spacing: -0.35px;
+  line-height: 1.25;
+
+  transition: color 280ms ease;
+}
+
+.intro h1 span {
+  color: var(--accent);
+  transition: color 280ms ease;
+}
+
+.intro-description {
+  margin: 5px 0 0;
+  color: var(--muted-text);
+  font-size: 14px;
+  line-height: 1.45;
+
+  transition: color 280ms ease;
+}
+
+/* --------------------------------------------------
+   Input and output panels
+-------------------------------------------------- */
+
+.workspace {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 14px;
+}
+
+.text-panel {
+  min-width: 0;
+  height: clamp(330px, 52vh, 490px);
+  padding: 15px 17px 7px;
+
+  display: flex;
+  flex-direction: column;
+
+  border: 1px solid var(--panel-border);
+  border-radius: 12px;
+  background: var(--input-panel-bg);
+
+  transition:
+    background-color 280ms ease,
+    border-color 280ms ease;
+}
+
+.output-panel {
+  border-color: var(--output-panel-border);
+  background: var(--output-panel-bg);
+}
+
+.panel-header,
+.panel-heading,
+.panel-footer {
+  display: flex;
+  align-items: center;
+}
+
+.panel-header {
+  justify-content: space-between;
+  gap: 10px;
+  min-height: 36px;
+}
+
+.panel-heading {
+  justify-content: flex-start;
+  gap: 8px;
+  min-width: 0;
+}
+
+.panel-number {
+  color: var(--metadata);
+  font-size: 10px;
+  font-variant-numeric: tabular-nums;
+
+  transition: color 280ms ease;
+}
+
+.panel-heading h2 {
+  margin: 0;
+  color: var(--main-text);
+  font-size: 15px;
+  font-weight: 650;
+
+  transition: color 280ms ease;
+}
+
+/* --------------------------------------------------
+   Action buttons and icons
+-------------------------------------------------- */
+
+.primary-button,
+.small-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  white-space: nowrap;
+  line-height: 1.2;
+
+  transition:
+    background-color 200ms ease,
+    border-color 200ms ease,
+    color 200ms ease,
+    transform 160ms ease;
+}
+
+.primary-button {
+  padding: 9px 12px;
+  border: 1px solid var(--primary-border);
+  border-radius: 8px;
+  background: var(--primary-bg);
+  color: var(--primary-text);
+
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.primary-button:hover:not(:disabled) {
+  border-color: var(--primary-hover);
+  background: var(--primary-hover);
+  transform: translateY(-1px);
+}
+
+.primary-button:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.clean-button {
+  flex: 0 0 auto;
+}
+
+.small-button {
+  padding: 6px 9px;
+  border: 1px solid var(--small-border);
+  border-radius: 7px;
+  background: transparent;
+  color: var(--small-text);
+
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.small-button:hover:not(:disabled) {
+  border-color: var(--small-hover-border);
+  background: var(--small-hover-bg);
+}
+
+.small-button:active:not(:disabled) {
+  transform: translateY(1px);
+}
+
+.action-icon {
+  display: block;
+  flex: 0 0 15px;
+  width: 15px;
+  height: 15px;
+}
+
+/* --------------------------------------------------
+   Text field labels and text areas
+-------------------------------------------------- */
+
+.field-hint {
+  flex: 0 0 auto;
+  margin: 13px 0 6px;
+
+  color: var(--muted-strong);
+  font-size: 10px;
+  font-weight: 650;
+  letter-spacing: 1.1px;
+
+  transition: color 280ms ease;
+}
+
+.text-area {
+  display: block;
+  width: 100%;
+  min-height: 0;
+  flex: 1 1 auto;
+
+  resize: none;
+  overflow: auto;
+  padding: 0;
+
+  border: none;
+  outline: none;
+  border-radius: 3px;
+  background: transparent;
+  color: var(--main-text);
+
+  font-size: 14px;
+  line-height: 1.65;
+
+  transition: color 280ms ease;
+}
+
+.text-area::placeholder {
+  color: var(--placeholder);
+  opacity: 1;
+
+  transition: color 280ms ease;
+}
+
+.text-area:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 3px;
+}
+
+.output-area {
+  color: var(--output-text);
+}
+
+/* --------------------------------------------------
+   Character count, Clear button and feedback
+-------------------------------------------------- */
+
+.panel-footer {
+  flex: 0 0 auto;
+  justify-content: space-between;
+  gap: 8px;
+
+  min-height: 34px;
+  margin-top: 5px;
+  padding-top: 6px;
+  border-top: 1px solid var(--divider);
+
+  color: var(--metadata);
+  font-size: 11px;
+  line-height: 1.35;
+
+  transition:
+    color 280ms ease,
+    border-color 280ms ease;
+}
+
+.footer-clear-button {
+  margin-left: auto;
+  flex: 0 0 auto;
+}
+
+.status-message {
+  max-width: 70%;
+  text-align: right;
+}
+
+/* --------------------------------------------------
+   Cleaning settings
+-------------------------------------------------- */
+
+/* One shared panel for both settings groups */
+
+.bottom-controls {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  margin-top: 10px;
+  padding: 0;
+}
+
+.setting-block {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.settings-label {
+  color: var(--muted-strong);
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.35;
+
+  transition: color 280ms ease;
+}
+
+/* Shared segmented controls */
+
+.segmented-control {
+  display: inline-flex;
+  align-items: center;
+  flex-wrap: nowrap;
+  gap: 3px;
+
+  max-width: 100%;
+  min-height: 42px;
+  padding: 4px;
+
+  border: 1px solid var(--segment-border);
+  border-radius: 12px;
+  background: var(--segment-bg);
+
+  transition:
+    background-color 220ms ease,
+    border-color 220ms ease;
+}
+
+.segment-option {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  min-height: 32px;
+  min-width: 58px;
+  padding: 6px 13px;
+
+  border: 1px solid transparent;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--muted-text);
+
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.3;
+  white-space: nowrap;
+
+  transition:
+    background-color 180ms ease,
+    border-color 180ms ease,
+    color 180ms ease,
+    transform 160ms ease;
+}
+
+.segment-option:hover:not(.is-selected) {
+  background: var(--small-hover-bg);
+  color: var(--main-text);
+}
+
+.segment-option:active {
+  transform: scale(0.98);
+}
+
+.segment-option.is-selected {
+  border-color: var(--segment-selected-border);
+  background: var(--segment-selected-bg);
+  color: var(--segment-selected-text);
+  box-shadow: 0 1px 2px rgb(30 40 30 / 7%);
+  font-weight: 550;
+}
+
+/* Slightly tighter padding for the three link options */
+
+.link-segmented-control .segment-option {
+  min-width: auto;
+  padding-right: 12px;
+  padding-left: 12px;
+}
+
+/* Descriptive text below each setting */
+
+.link-help {
+  max-width: 390px;
+  margin: 0;
+
+  color: var(--muted-text);
+  font-size: 12px;
+  line-height: 1.45;
+
+  transition: color 280ms ease;
+}
+
+/* --------------------------------------------------
+   Keyboard focus
+-------------------------------------------------- */
+
+.theme-toggle:focus-visible,
+.primary-button:focus-visible,
+.small-button:focus-visible,
+.segment-option:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 3px;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* --------------------------------------------------
+   Tablet layout
+-------------------------------------------------- */
+
+@media (max-width: 760px) {
+  .topbar {
+    height: 60px;
+    padding: 0 6%;
+  }
+
+  .main-content {
+    width: 88%;
+    padding-top: 17px;
+  }
+
+  .workspace {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 12px;
+  }
+
+  .text-panel {
+    height: 320px;
+    padding: 14px 15px 9px;
+  }
+
+  .bottom-controls {
+    margin-top: 10px;
+    padding: 14px 15px;
+    gap: 17px;
+  }
+}
+
+/* --------------------------------------------------
+   Small mobile screens
+-------------------------------------------------- */
+
+@media (max-width: 430px) {
+  .topbar {
+    padding: 0 5%;
+  }
+
+  .brand-name {
+    font-size: 28px;
+  }
+
+  .topbar-actions {
+    gap: 7px;
+  }
+
+  .theme-toggle {
+    width: 33px;
+    height: 33px;
+    flex-basis: 33px;
+    border-radius: 9px;
+  }
+
+  .theme-icon {
+    width: 18px;
+    height: 18px;
+  }
+
+  .local-processing-icon {
+    width: 17px;
+    height: 17px;
+    flex-basis: 17px;
+  }
+
+  .privacy-label {
+    font-size: 8px;
+    letter-spacing: 0.5px;
+  }
+
+  .main-content {
+    width: 90%;
+  }
+
+  .intro h1 {
+    font-size: 20px;
+    letter-spacing: -0.35px;
+  }
+
+  .intro-description {
+    font-size: 13px;
+  }
+
+  .panel-heading {
+    gap: 6px;
+  }
+
+  .panel-heading h2 {
+    font-size: 14px;
+  }
+
+  .primary-button {
+    gap: 6px;
+    padding: 8px 9px;
+    font-size: 12px;
+  }
+
+  .action-icon {
+    width: 14px;
+    height: 14px;
+    flex-basis: 14px;
+  }
+
+  .small-button {
+    gap: 5px;
+    padding: 6px 7px;
+    font-size: 11px;
+  }
+
+  .panel-footer {
+    font-size: 10px;
+  }
+
+  .status-message {
+    max-width: 65%;
+  }
+
+  .bottom-controls {
+    gap: 16px;
+    padding: 13px;
+    margin-top: 10px;
+  }
+
+  .setting-block {
+    gap: 7px;
+  }
+
+  .segmented-control {
+    min-height: 40px;
+    max-width: 100%;
+  }
+
+  .segment-option {
+    min-width: 52px;
+    padding: 6px 11px;
+    font-size: 12px;
+  }
+
+  .link-segmented-control .segment-option {
+    padding-right: 9px;
+    padding-left: 9px;
+  }
+
+  .link-help {
+    font-size: 11px;
+  }
+}
+
+/* --------------------------------------------------
+   Respect reduced-motion preferences
+-------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

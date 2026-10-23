@@ -1,0 +1,17 @@
+:root {
+  color-scheme: light;
+}
+
+html {
+  min-width: 320px;
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+}
+
+button,
+textarea {
+  font-family: inherit;
+}
