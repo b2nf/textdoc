@@ -1015,3 +1015,8 @@ button:disabled {
     transition-duration: 0.01ms !important;
   }
 }
+input,
+textarea,
+select {
+  font-size: 16px !important;
+}
